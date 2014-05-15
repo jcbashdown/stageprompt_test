@@ -1,29 +1,30 @@
 <!doctype html>
 <html>
-  <head>
+  <head data-journey="blargle:wibble:bob">
     <script src="stageprompt.2.0.1.js" type="text/javascript"></script>
     <script src="https://raw.githubusercontent.com/alphagov/static/master/app/assets/javascripts/libs/jquery/jquery-1.7.2.js" type="text/javascript"></script>
   </head>
 </html>
 <script type="text/javascript">
         
+//http://developer.piwik.org/api-reference/tracking-javascript#list-of-all-methods-available-in-the-tracking-api
+  var _paq 
+  var u
+  var d
   window.onload=function(){
-    GOVUK.performance.stageprompt.setup(function (category, event, label) {
-      // Code to send to your Piwik account
-    });
-<!-- Piwik -->
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://192.168.18.20:8080/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 2]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    _paq = _paq || [];
+    u = (("https:" == document.location.protocol) ? "https" : "http") + "://192.168.18.20:8080/piwik/";
+    d = document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
     g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-<!-- End Piwik Code -->
+    GOVUK.performance.stageprompt.setup(function (category, event, label) {
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 2]);
+        _paq.push(['trackEvent', category, event, label]);
+        _paq.push(['enableLinkTracking']);
+    });
   };
+<!-- Piwik -->
+<!-- End Piwik Code -->
 
 </script>
 <noscript><p><img src="http://192.168.18.20:8080/piwik/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
